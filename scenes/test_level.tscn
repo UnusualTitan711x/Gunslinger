@@ -15,7 +15,9 @@ distance = -645.0
 [node name="Player" parent="." instance=ExtResource("1_2venv")]
 position = Vector2(564, 415)
 
-[node name="Camera2D" type="Camera2D" parent="Player"]
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(564, 415)
+zoom = Vector2(0.6, 0.6)
 
 [node name="MeshInstance2D2" type="MeshInstance2D" parent="."]
 position = Vector2(95, 603)

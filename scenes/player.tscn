@@ -1,39 +1,43 @@
-[gd_scene load_steps=5 format=3 uid="uid://ciq0ar4hxxtg4"]
+[gd_scene load_steps=6 format=3 uid="uid://ciq0ar4hxxtg4"]
 
 [ext_resource type="Script" uid="uid://fa4epfoxwax8" path="res://scenes/player.gd" id="1_3vyb7"]
+[ext_resource type="Texture2D" uid="uid://cxm8rapbhxvp0" path="res://assets/Characters/blue_body_square.png" id="2_g2els"]
+[ext_resource type="Texture2D" uid="uid://cky0w5bnhyo8j" path="res://assets/Characters/face_e.png" id="3_dqkch"]
+[ext_resource type="Texture2D" uid="uid://cdlxodjo3rwfd" path="res://assets/Characters/blue_hand_closed.png" id="4_dqkch"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_u8vuu"]
-radius = 19.2354
-
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_3vyb7"]
-
-[sub_resource type="BoxMesh" id="BoxMesh_3vyb7"]
+radius = 40.0125
 
 [node name="Player" type="CharacterBody2D"]
+collision_mask = 3
 script = ExtResource("1_3vyb7")
 
+[node name="Character" type="Sprite2D" parent="."]
+position = Vector2(0, 9.53674e-07)
+texture = ExtResource("2_g2els")
+metadata/_edit_lock_ = true
+
+[node name="Face" type="Sprite2D" parent="Character"]
+texture = ExtResource("3_dqkch")
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 11)
 shape = SubResource("CircleShape2D_u8vuu")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(0, 9.53674e-07)
-scale = Vector2(38, 60)
-texture = SubResource("PlaceholderTexture2D_3vyb7")
-
 [node name="RightMarker" type="Marker2D" parent="."]
-position = Vector2(21, 0)
+position = Vector2(53, 0)
+rotation = 1.57079
 
 [node name="LeftMarker" type="Marker2D" parent="."]
-position = Vector2(-21, 0)
+position = Vector2(-49, 0)
+rotation = -1.57079
 
 [node name="UpMarker" type="Marker2D" parent="."]
-position = Vector2(0, -31)
+position = Vector2(0, -50)
 
 [node name="DownMarker" type="Marker2D" parent="."]
-position = Vector2(0, 31)
+position = Vector2(0, 41)
+rotation = -3.14159
 
-[node name="Gun" type="MeshInstance2D" parent="."]
-position = Vector2(27, -2.38419e-07)
-scale = Vector2(6.5, 5.5)
-mesh = SubResource("BoxMesh_3vyb7")
+[node name="Gun" type="Sprite2D" parent="."]
+position = Vector2(53, 0)
+texture = ExtResource("4_dqkch")
