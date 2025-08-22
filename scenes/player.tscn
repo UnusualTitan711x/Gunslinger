@@ -5,11 +5,9 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_u8vuu"]
 radius = 19.2354
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3vyb7"]
-albedo_color = Color(0.927342, 0, 0.19623, 1)
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_3vyb7"]
 
-[sub_resource type="BoxMesh" id="BoxMesh_g2els"]
-material = SubResource("StandardMaterial3D_3vyb7")
+[sub_resource type="BoxMesh" id="BoxMesh_3vyb7"]
 
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_3vyb7")
@@ -18,7 +16,24 @@ script = ExtResource("1_3vyb7")
 position = Vector2(0, 11)
 shape = SubResource("CircleShape2D_u8vuu")
 
-[node name="MeshInstance2D" type="MeshInstance2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, 9.53674e-07)
 scale = Vector2(38, 60)
-mesh = SubResource("BoxMesh_g2els")
-metadata/_edit_lock_ = true
+texture = SubResource("PlaceholderTexture2D_3vyb7")
+
+[node name="RightMarker" type="Marker2D" parent="."]
+position = Vector2(21, 0)
+
+[node name="LeftMarker" type="Marker2D" parent="."]
+position = Vector2(-21, 0)
+
+[node name="UpMarker" type="Marker2D" parent="."]
+position = Vector2(0, -31)
+
+[node name="DownMarker" type="Marker2D" parent="."]
+position = Vector2(0, 31)
+
+[node name="Gun" type="MeshInstance2D" parent="."]
+position = Vector2(27, -2.38419e-07)
+scale = Vector2(6.5, 5.5)
+mesh = SubResource("BoxMesh_3vyb7")
