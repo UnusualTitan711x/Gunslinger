@@ -11,21 +11,26 @@ const JUMP_VELOCITY = -400.0
 
 var bullet = preload("res://scenes/projectile.tscn")
 
+func _ready() -> void:
+	# Set the gun at the right position on start
+	gun.global_transform = right_marker.global_transform
+
 func _process(delta: float) -> void:
+	# Input
 	var direction := Input.get_axis("move_left", "move_right")
 	var look := Input.get_axis("crouch", "look_up")
 	
-	# Flip sprite to face movement direction
+	# Set the gun to face up, down, left or right
 	if direction > 0:
 		gun.global_transform = right_marker.global_transform
 	elif direction < 0:
 		gun.global_transform = left_marker.global_transform
-	
-	if look > 0:
+	elif look > 0:
 		gun.global_transform = up_marker.global_transform
 	elif look < 0:
 		gun.global_transform = down_marker.global_transform
 	
+	# Shoot when shoot button is pressed
 	if Input.is_action_just_pressed("shoot"):
 		shoot()
 	
@@ -41,7 +46,6 @@ func _physics_process(delta: float) -> void:
 
 	# Get the input direction (-1, 0, 1)
 	var direction := Input.get_axis("move_left", "move_right")
-	var look := Input.get_axis("crouch", "look_up")
 	
 	# Apply movement
 	if direction:

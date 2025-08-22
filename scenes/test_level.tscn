@@ -25,6 +25,7 @@ scale = Vector2(87, 83)
 mesh = SubResource("BoxMesh_2venv")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="MeshInstance2D2"]
+collision_layer = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="MeshInstance2D2/StaticBody2D"]
 shape = SubResource("RectangleShape2D_2venv")
@@ -36,6 +37,7 @@ scale = Vector2(87, 83)
 mesh = SubResource("BoxMesh_2venv")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="MeshInstance2D3"]
+collision_layer = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="MeshInstance2D3/StaticBody2D"]
 shape = SubResource("RectangleShape2D_2venv")
@@ -48,6 +50,7 @@ scale = Vector2(126.175, 285.932)
 mesh = SubResource("BoxMesh_2venv")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="MeshInstance2D4"]
+collision_layer = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="MeshInstance2D4/StaticBody2D"]
 shape = SubResource("RectangleShape2D_2venv")
@@ -60,6 +63,7 @@ scale = Vector2(126.175, 285.932)
 mesh = SubResource("BoxMesh_2venv")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="MeshInstance2D6"]
+collision_layer = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="MeshInstance2D6/StaticBody2D"]
 shape = SubResource("RectangleShape2D_2venv")
