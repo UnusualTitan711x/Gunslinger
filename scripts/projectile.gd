@@ -11,7 +11,7 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	# Travel
-	position += Vector2(0, -speed * delta).rotated(dir)
+	position += Vector2(speed * delta, 0).rotated(dir)
 	
 	distance_covered += speed * delta
 	

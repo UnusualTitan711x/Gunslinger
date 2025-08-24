@@ -3,10 +3,11 @@
 [ext_resource type="Script" uid="uid://fa4epfoxwax8" path="res://scenes/player.gd" id="1_3vyb7"]
 [ext_resource type="Texture2D" uid="uid://cxm8rapbhxvp0" path="res://assets/Characters/blue_body_square.png" id="2_g2els"]
 [ext_resource type="Texture2D" uid="uid://cky0w5bnhyo8j" path="res://assets/Characters/face_e.png" id="3_dqkch"]
-[ext_resource type="Texture2D" uid="uid://cdlxodjo3rwfd" path="res://assets/Characters/blue_hand_closed.png" id="4_dqkch"]
+[ext_resource type="Texture2D" uid="uid://cqiyrsbwm1cxc" path="res://assets/Characters/red_body_square.png" id="4_dqkch"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_u8vuu"]
-radius = 40.0125
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_qhqgy"]
+radius = 30.0
+height = 120.0
 
 [node name="Player" type="CharacterBody2D"]
 collision_mask = 3
@@ -14,30 +15,51 @@ script = ExtResource("1_3vyb7")
 
 [node name="Character" type="Sprite2D" parent="."]
 position = Vector2(0, 9.53674e-07)
+scale = Vector2(0.725, 1.5)
 texture = ExtResource("2_g2els")
 metadata/_edit_lock_ = true
 
-[node name="Face" type="Sprite2D" parent="Character"]
+[node name="Face" type="Sprite2D" parent="."]
+position = Vector2(0, -37)
+scale = Vector2(0.690909, 0.6)
 texture = ExtResource("3_dqkch")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_u8vuu")
+shape = SubResource("CapsuleShape2D_qhqgy")
+metadata/_edit_lock_ = true
 
 [node name="RightMarker" type="Marker2D" parent="."]
-position = Vector2(53, 0)
-rotation = 1.57079
+position = Vector2(41.0001, -17)
 
 [node name="LeftMarker" type="Marker2D" parent="."]
-position = Vector2(-49, 0)
-rotation = -1.57079
+position = Vector2(-42, -16)
+scale = Vector2(-1, 1)
+
+[node name="RightDownMarker" type="Marker2D" parent="."]
+position = Vector2(41.0001, 21.0001)
+
+[node name="LeftDownMarker" type="Marker2D" parent="."]
+position = Vector2(-42, 22.0001)
+scale = Vector2(-1, 1)
 
 [node name="UpMarker" type="Marker2D" parent="."]
-position = Vector2(0, -50)
+position = Vector2(0, -63)
+rotation = -1.57079
 
 [node name="DownMarker" type="Marker2D" parent="."]
-position = Vector2(0, 41)
-rotation = -3.14159
+position = Vector2(0, 65)
+rotation = 1.57079
 
-[node name="Gun" type="Sprite2D" parent="."]
-position = Vector2(53, 0)
+[node name="Gun" type="Node2D" parent="."]
+position = Vector2(48, -3)
+
+[node name="Sprite2D" type="Sprite2D" parent="Gun"]
+position = Vector2(9, -6)
+scale = Vector2(0.45, 0.125)
+texture = ExtResource("4_dqkch")
+
+[node name="Sprite2D2" type="Sprite2D" parent="Gun"]
+position = Vector2(-7, 3)
+rotation = 0.230933
+scale = Vector2(0.0875, 0.225481)
 texture = ExtResource("4_dqkch")
