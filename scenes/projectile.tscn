@@ -7,7 +7,7 @@
 
 [node name="Projectile" type="Area2D"]
 collision_layer = 4
-collision_mask = 6
+collision_mask = 3
 script = ExtResource("1_q3m7n")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

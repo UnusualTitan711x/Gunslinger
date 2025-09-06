@@ -1,0 +1,56 @@
+[gd_scene load_steps=4 format=3 uid="uid://da27ivves6ra1"]
+
+[ext_resource type="Script" uid="uid://td408bdd0ofn" path="res://scripts/enemy.gd" id="1_md0e3"]
+[ext_resource type="Texture2D" uid="uid://cqiyrsbwm1cxc" path="res://assets/Characters/red_body_square.png" id="2_4ra3w"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_qhqgy"]
+radius = 30.0
+height = 120.0
+
+[node name="Enemy" type="CharacterBody2D"]
+collision_mask = 3
+script = ExtResource("1_md0e3")
+
+[node name="normal_sprite" type="Sprite2D" parent="."]
+position = Vector2(0, 9.53674e-07)
+scale = Vector2(0.725, 1.5)
+texture = ExtResource("2_4ra3w")
+
+[node name="crouch_sprite" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(0, 29.5)
+scale = Vector2(0.725, 0.7625)
+texture = ExtResource("2_4ra3w")
+
+[node name="normal_collider" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_qhqgy")
+metadata/_edit_lock_ = true
+
+[node name="RightMarker" type="Marker2D" parent="."]
+position = Vector2(41.0001, -17)
+
+[node name="LeftMarker" type="Marker2D" parent="."]
+position = Vector2(-42, -16)
+scale = Vector2(-1, 1)
+
+[node name="UpMarker" type="Marker2D" parent="."]
+position = Vector2(0, -63)
+rotation = -1.57079
+
+[node name="DownMarker" type="Marker2D" parent="."]
+position = Vector2(0, 65)
+rotation = 1.57079
+
+[node name="Gun" type="Node2D" parent="."]
+position = Vector2(48, -3)
+
+[node name="Sprite2D" type="Sprite2D" parent="Gun"]
+position = Vector2(9, -6)
+scale = Vector2(0.45, 0.125)
+texture = ExtResource("2_4ra3w")
+
+[node name="Sprite2D2" type="Sprite2D" parent="Gun"]
+position = Vector2(-7, 3)
+rotation = 0.230933
+scale = Vector2(0.0875, 0.225481)
+texture = ExtResource("2_4ra3w")

@@ -1,8 +1,8 @@
 extends Area2D
 
-var speed = 450
+@export var speed = 1000
 var dir 
-var range = 5000
+var bullet_range = 5000
 var distance_covered
 
 func _ready() -> void:
@@ -15,7 +15,7 @@ func _process(delta: float) -> void:
 	
 	distance_covered += speed * delta
 	
-	if distance_covered >= range:
+	if distance_covered >= bullet_range:
 		queue_free()
 	pass
 

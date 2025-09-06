@@ -1,80 +1,47 @@
-[gd_scene load_steps=5 format=3 uid="uid://b2tkg7q4vgi4b"]
+[gd_scene load_steps=7 format=3 uid="uid://b2tkg7q4vgi4b"]
 
 [ext_resource type="PackedScene" uid="uid://ciq0ar4hxxtg4" path="res://scenes/player.tscn" id="1_2venv"]
-
-[sub_resource type="BoxMesh" id="BoxMesh_2venv"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_2venv"]
-size = Vector2(1, 1)
+[ext_resource type="PackedScene" uid="uid://da27ivves6ra1" path="res://scenes/enemy.tscn" id="2_paw1w"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_2venv"]
 distance = -645.0
+
+[sub_resource type="BoxMesh" id="BoxMesh_2venv"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_paw1w"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_j6w7d"]
 
 [node name="TestLevel" type="Node2D"]
 
 [node name="Player" parent="." instance=ExtResource("1_2venv")]
 position = Vector2(564, 415)
 
-[node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(564, 415)
+[node name="Camera2D" type="Camera2D" parent="Player"]
 zoom = Vector2(0.6, 0.6)
+process_callback = 0
+position_smoothing_enabled = true
 
-[node name="MeshInstance2D2" type="MeshInstance2D" parent="."]
-position = Vector2(95, 603)
-scale = Vector2(87, 83)
-mesh = SubResource("BoxMesh_2venv")
+[node name="Floor" type="StaticBody2D" parent="."]
 
-[node name="StaticBody2D" type="StaticBody2D" parent="MeshInstance2D2"]
-collision_layer = 2
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor"]
+shape = SubResource("WorldBoundaryShape2D_2venv")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="MeshInstance2D2/StaticBody2D"]
-shape = SubResource("RectangleShape2D_2venv")
-metadata/_edit_lock_ = true
-
-[node name="MeshInstance2D3" type="MeshInstance2D" parent="."]
-position = Vector2(510, 603)
-scale = Vector2(87, 83)
-mesh = SubResource("BoxMesh_2venv")
-
-[node name="StaticBody2D" type="StaticBody2D" parent="MeshInstance2D3"]
-collision_layer = 2
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="MeshInstance2D3/StaticBody2D"]
-shape = SubResource("RectangleShape2D_2venv")
-metadata/_edit_lock_ = true
-
-[node name="MeshInstance2D4" type="MeshInstance2D" parent="."]
-position = Vector2(943, 658)
-rotation = 1.25446
-scale = Vector2(126.175, 285.932)
-mesh = SubResource("BoxMesh_2venv")
-
-[node name="StaticBody2D" type="StaticBody2D" parent="MeshInstance2D4"]
-collision_layer = 2
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="MeshInstance2D4/StaticBody2D"]
-shape = SubResource("RectangleShape2D_2venv")
-metadata/_edit_lock_ = true
-
-[node name="MeshInstance2D6" type="MeshInstance2D" parent="."]
-position = Vector2(1169, 666)
-rotation = -1.17197
-scale = Vector2(126.175, 285.932)
-mesh = SubResource("BoxMesh_2venv")
-
-[node name="StaticBody2D" type="StaticBody2D" parent="MeshInstance2D6"]
-collision_layer = 2
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="MeshInstance2D6/StaticBody2D"]
-shape = SubResource("RectangleShape2D_2venv")
-metadata/_edit_lock_ = true
-
-[node name="MeshInstance2D5" type="MeshInstance2D" parent="."]
+[node name="MeshInstance2D5" type="MeshInstance2D" parent="Floor"]
 position = Vector2(127.5, 762.75)
 scale = Vector2(4173, 236.5)
 mesh = SubResource("BoxMesh_2venv")
 
-[node name="StaticBody2D" type="StaticBody2D" parent="."]
+[node name="Enemy" parent="." instance=ExtResource("2_paw1w")]
+position = Vector2(764, 474)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
-shape = SubResource("WorldBoundaryShape2D_2venv")
+[node name="block" type="Node2D" parent="."]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="block"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="block/StaticBody2D"]
+shape = SubResource("RectangleShape2D_paw1w")
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="block/StaticBody2D/CollisionShape2D"]
+scale = Vector2(20, 20)
+mesh = SubResource("QuadMesh_j6w7d")

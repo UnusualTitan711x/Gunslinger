@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://ciq0ar4hxxtg4"]
 
-[ext_resource type="Script" uid="uid://fa4epfoxwax8" path="res://scenes/player.gd" id="1_3vyb7"]
+[ext_resource type="Script" uid="uid://fa4epfoxwax8" path="res://scripts/player.gd" id="1_3vyb7"]
 [ext_resource type="Texture2D" uid="uid://cxm8rapbhxvp0" path="res://assets/Characters/blue_body_square.png" id="2_g2els"]
 [ext_resource type="Texture2D" uid="uid://cky0w5bnhyo8j" path="res://assets/Characters/face_e.png" id="3_dqkch"]
 [ext_resource type="Texture2D" uid="uid://cqiyrsbwm1cxc" path="res://assets/Characters/red_body_square.png" id="4_dqkch"]
@@ -9,22 +9,38 @@
 radius = 30.0
 height = 120.0
 
-[node name="Player" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D" groups=["Player"]]
 collision_mask = 3
 script = ExtResource("1_3vyb7")
+speed = 500.0
+gravity = 1100.0
 
-[node name="Character" type="Sprite2D" parent="."]
+[node name="normal_sprite" type="Sprite2D" parent="."]
 position = Vector2(0, 9.53674e-07)
 scale = Vector2(0.725, 1.5)
 texture = ExtResource("2_g2els")
-metadata/_edit_lock_ = true
 
-[node name="Face" type="Sprite2D" parent="."]
-position = Vector2(0, -37)
-scale = Vector2(0.690909, 0.6)
+[node name="Face" type="Sprite2D" parent="normal_sprite"]
+position = Vector2(0, -24.6667)
+scale = Vector2(0.952978, 0.4)
 texture = ExtResource("3_dqkch")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="crouch_sprite" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(0, 29.5)
+scale = Vector2(0.725, 0.7625)
+texture = ExtResource("2_g2els")
+
+[node name="Face" type="Sprite2D" parent="crouch_sprite"]
+position = Vector2(0, -17.7049)
+scale = Vector2(0.952978, 0.786885)
+texture = ExtResource("3_dqkch")
+
+[node name="normal_collider" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_qhqgy")
+metadata/_edit_lock_ = true
+
+[node name="crouch_collider" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_qhqgy")
 metadata/_edit_lock_ = true
 
