@@ -1,9 +1,11 @@
 extends Area2D
 
 @export var speed = 1000
+
 var dir 
 var bullet_range = 5000
 var distance_covered
+var projectile_owner = ""
 
 func _ready() -> void:
 	distance_covered = 0
@@ -20,5 +22,9 @@ func _process(delta: float) -> void:
 	pass
 
 
-func _on_body_entered(_body: Node2D) -> void:
+func _on_body_entered(body: Node2D) -> void:
+	if body is Enemy and projectile_owner == "player":
+		body.queue_free()
+	elif body is Player and projectile_owner == "enemy":
+		body.die()
 	queue_free()

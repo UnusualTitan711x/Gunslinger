@@ -1,7 +1,17 @@
-[gd_scene load_steps=7 format=3 uid="uid://b2tkg7q4vgi4b"]
+[gd_scene load_steps=11 format=3 uid="uid://b2tkg7q4vgi4b"]
 
 [ext_resource type="PackedScene" uid="uid://ciq0ar4hxxtg4" path="res://scenes/player.tscn" id="1_2venv"]
+[ext_resource type="Script" uid="uid://c3flhaywq1gm3" path="res://scripts/camera.gd" id="1_j6w7d"]
+[ext_resource type="Script" uid="uid://dqinpoonsehd3" path="res://scripts/game_manager.gd" id="1_x4b8f"]
 [ext_resource type="PackedScene" uid="uid://da27ivves6ra1" path="res://scenes/enemy.tscn" id="2_paw1w"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_paw1w"]
+normal = Vector2(1, 0)
+distance = -929.0
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_j6w7d"]
+normal = Vector2(-1, 0)
+distance = -940.0
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_2venv"]
 distance = -645.0
@@ -14,15 +24,43 @@ distance = -645.0
 
 [node name="TestLevel" type="Node2D"]
 
-[node name="Player" parent="." instance=ExtResource("1_2venv")]
-position = Vector2(564, 415)
+[node name="Game Manager" type="Node" parent="."]
+script = ExtResource("1_x4b8f")
 
-[node name="Camera2D" type="Camera2D" parent="Player"]
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(564, 415)
 zoom = Vector2(0.6, 0.6)
 process_callback = 0
 position_smoothing_enabled = true
+script = ExtResource("1_j6w7d")
+
+[node name="LeftBoundary" type="StaticBody2D" parent="Camera2D"]
+collision_layer = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Camera2D/LeftBoundary"]
+shape = SubResource("WorldBoundaryShape2D_paw1w")
+
+[node name="RightBoundary" type="StaticBody2D" parent="Camera2D"]
+collision_layer = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Camera2D/RightBoundary"]
+shape = SubResource("WorldBoundaryShape2D_j6w7d")
+
+[node name="LeftSpawner" type="Marker2D" parent="Camera2D"]
+unique_name_in_owner = true
+position = Vector2(-1055, 88)
+
+[node name="Right Spawner" type="Marker2D" parent="Camera2D"]
+unique_name_in_owner = true
+position = Vector2(1032, 88)
+
+[node name="Player" parent="." instance=ExtResource("1_2venv")]
+position = Vector2(564, 415)
+collision_mask = 27
 
 [node name="Floor" type="StaticBody2D" parent="."]
+collision_layer = 2
+collision_mask = 15
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Floor"]
 shape = SubResource("WorldBoundaryShape2D_2venv")
@@ -33,15 +71,17 @@ scale = Vector2(4173, 236.5)
 mesh = SubResource("BoxMesh_2venv")
 
 [node name="Enemy" parent="." instance=ExtResource("2_paw1w")]
-position = Vector2(764, 474)
+position = Vector2(1345, 556)
 
-[node name="block" type="Node2D" parent="."]
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(275, 697)
+scale = Vector2(10, 10)
 
-[node name="StaticBody2D" type="StaticBody2D" parent="block"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="block/StaticBody2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
 shape = SubResource("RectangleShape2D_paw1w")
+metadata/_edit_lock_ = true
 
-[node name="MeshInstance2D" type="MeshInstance2D" parent="block/StaticBody2D/CollisionShape2D"]
+[node name="MeshInstance2D" type="MeshInstance2D" parent="StaticBody2D/CollisionShape2D"]
 scale = Vector2(20, 20)
 mesh = SubResource("QuadMesh_j6w7d")
+metadata/_edit_lock_ = true

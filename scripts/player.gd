@@ -23,14 +23,21 @@ class_name Player
 var bullet = preload("res://scenes/projectile.tscn")
 var facing_direction = 1
 var is_crouching: bool = false
+var direction : Vector2
+var dead : bool = false
 
 func _ready() -> void:
 	# Set the gun at the right position on start
 	gun.global_transform = right_marker.global_transform
 
 func _process(delta: float) -> void:
+	if Input.is_action_just_pressed("restart"):
+		get_tree().reload_current_scene()
+	
+	if dead: return
+	
 	# Input
-	var direction := Input.get_vector("move_left", "move_right", "crouch", "look_up")
+	direction = Input.get_vector("move_left", "move_right", "crouch", "look_up")
 	
 	# Get proper facing directions
 	if direction.x > 0:
@@ -42,9 +49,9 @@ func _process(delta: float) -> void:
 	if direction.y > 0:
 		gun.global_transform = up_marker.global_transform
 		
-		normal_collider.disabled = true
+		normal_collider.disabled = false
 		normal_sprite.visible = true
-		crouch_collider.disabled = false
+		crouch_collider.disabled = true
 		crouch_sprite.visible = false
 	elif direction.y < 0:
 		if is_on_floor(): # Basically crouching
@@ -53,9 +60,9 @@ func _process(delta: float) -> void:
 			elif facing_direction < 0:
 				gun.global_transform = left_down_marker.global_transform
 			
-			normal_collider.disabled = false
+			normal_collider.disabled = true
 			normal_sprite.visible = false
-			crouch_collider.disabled = true
+			crouch_collider.disabled = false
 			crouch_sprite.visible = true
 			
 		else:
@@ -66,9 +73,9 @@ func _process(delta: float) -> void:
 		elif facing_direction < 0:
 			gun.global_transform = left_marker.global_transform
 		
-		normal_collider.disabled = true
+		normal_collider.disabled = false
 		normal_sprite.visible = true
-		crouch_collider.disabled = false
+		crouch_collider.disabled = true
 		crouch_sprite.visible = false
 	
 	# Shoot when shoot button is pressed
@@ -77,12 +84,14 @@ func _process(delta: float) -> void:
 	
 
 func _physics_process(delta: float) -> void:
+	if dead: return
+	
 	# Add the gravity.
 	if not is_on_floor():
 		velocity.y += gravity * delta
 
 	# Handle jump.
-	if Input.is_action_just_pressed("jump") and is_on_floor():
+	if Input.is_action_just_pressed("jump") and is_on_floor() and direction.y >= 0:
 		velocity.y = -jump_velocity
 
 	# Get the input direction (-1, 0, 1)
@@ -100,4 +109,10 @@ func shoot():
 	var instance = bullet.instantiate()
 	instance.global_transform = gun.global_transform
 	instance.dir = gun.rotation
-	get_tree().root.add_child(instance)
+	instance.projectile_owner = "player"
+	get_tree().current_scene.add_child(instance)
+
+func die():
+	dead = true
+	normal_sprite.visible = false
+	get_tree().call_deferred("reload_current_scene")

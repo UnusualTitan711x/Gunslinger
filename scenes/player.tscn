@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://ciq0ar4hxxtg4"]
+[gd_scene load_steps=7 format=3 uid="uid://ciq0ar4hxxtg4"]
 
 [ext_resource type="Script" uid="uid://fa4epfoxwax8" path="res://scripts/player.gd" id="1_3vyb7"]
 [ext_resource type="Texture2D" uid="uid://cxm8rapbhxvp0" path="res://assets/Characters/blue_body_square.png" id="2_g2els"]
@@ -8,6 +8,10 @@
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_qhqgy"]
 radius = 30.0
 height = 120.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_dqkch"]
+radius = 21.0
+height = 48.0
 
 [node name="Player" type="CharacterBody2D" groups=["Player"]]
 collision_mask = 3
@@ -41,8 +45,9 @@ shape = SubResource("CapsuleShape2D_qhqgy")
 metadata/_edit_lock_ = true
 
 [node name="crouch_collider" type="CollisionShape2D" parent="."]
-shape = SubResource("CapsuleShape2D_qhqgy")
-metadata/_edit_lock_ = true
+visible = false
+position = Vector2(0, 35)
+shape = SubResource("CapsuleShape2D_dqkch")
 
 [node name="RightMarker" type="Marker2D" parent="."]
 position = Vector2(41.0001, -17)
